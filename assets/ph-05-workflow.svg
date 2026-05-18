@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1000" width="1800" height="1000">
+    <defs><radialGradient id="bgg" cx="40%" cy="45%" r="75%">
+      <stop offset="0%" stop-color="#3a3a3a"></stop>
+      <stop offset="55%" stop-color="#1a1a1a"></stop>
+      <stop offset="100%" stop-color="#050505"></stop>
+    </radialGradient><filter id="gr" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.88" numOctaves="2" seed="8"></feTurbulence>
+    <feColorMatrix values="0 0 0 0 0.55  0 0 0 0 0.53  0 0 0 0 0.5  0 0 0 0.35 0"></feColorMatrix>
+  </filter><radialGradient id="vig" cx="50%" cy="50%" r="70%">
+    <stop offset="60%" stop-color="#000" stop-opacity="0"></stop>
+    <stop offset="100%" stop-color="#000" stop-opacity=".75"></stop>
+  </radialGradient></defs>
+    <rect width="1800" height="1000" fill="url(#bgg)"></rect>
+    <rect x="0" y="550" width="1800" height="450" fill="#0c0c0c" opacity=".95"></rect><rect x="450" y="220" width="900" height="320" fill="#1a1a1a" stroke="#3a3a3a" stroke-width="2"></rect><rect x="486.00000000000006" y="240" width="828" height="280" fill="url(#screenGrad)"></rect><defs><linearGradient id="screenGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7a7a7a"></stop><stop offset="100%" stop-color="#2a2a2a"></stop></linearGradient></defs><rect x="540" y="660" width="720" height="40" fill="#2a2a2a"></rect>
+    <rect width="1800" height="1000" fill="url(#vig)"></rect>
+    <rect width="1800" height="1000" fill="#fff" filter="url(#gr)" opacity=".22" style="mix-blend-mode:overlay"></rect>
+    <rect x="10" y="10" width="1780" height="980" fill="none" stroke="#dcd6c8" stroke-width="1" opacity=".25"></rect>
+    <text x="22" y="38" font-family="&#39;JetBrains Mono&#39;,monospace" font-size="16" fill="#dcd6c8" opacity=".65" letter-spacing="4">PH-05 · WORKFLOW</text>
+    <text x="22" y="946" font-family="&#39;Noto Serif TC&#39;,&#39;Songti SC&#39;,serif" font-weight="900" font-size="44" fill="#dcd6c8" opacity=".88">製 作 現 場</text>
+    <text x="22" y="976" font-family="&#39;JetBrains Mono&#39;,monospace" font-size="14" fill="#dcd6c8" opacity=".6" letter-spacing="2">STUDIO · WORKSTATION</text>
+  </svg>

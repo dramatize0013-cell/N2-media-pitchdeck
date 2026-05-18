@@ -1,0 +1,1838 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>恩次方文化創意 · 銷售簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=Noto+Sans+TC:wght@300;400;500;700;900&family=Bodoni+Moda:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap" rel="stylesheet">
+<style>
+/* ═══ N2 MEDIA · 深色編輯風 · 低調金色 ═══ */
+:root{
+  --ink:    #0b0d10;           /* near-black with blue hint */
+  --ink-2:  #13161b;
+  --paper:  #efece6;
+  --gold:   #c9a96a;           /* subdued gold accent */
+  --gold-2: #a9894a;
+  --mute:   rgba(239,236,230,.58);
+  --line:   rgba(239,236,230,.2);
+  --line-strong: rgba(239,236,230,.55);
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+html, body{
+  background:#000;
+  font-family:"Noto Sans TC", sans-serif;
+  color:var(--paper);
+  overflow:hidden;
+}
+
+/* ── CJK 斷行規則 ── 不要在句中亂斷行 */
+:lang(zh-Hant), :lang(zh), body, .body-copy, .title, .big-quote,
+.quote-big, .intro, .warm, .follow, .chapter, .chrome-tl, .chrome-tr,
+.chrome-bl, .chrome-br, .cn-big, .cn-sub, .eyebrow, .sub, .footline,
+.s6 .cell h3, .s6 .cell p,
+.s8 .step h3, .s8 .step p,
+.s9 .num-cell .dsc, .s9 .num-cell .lbl,
+.s10 .deliv-list li, .s10 .spec .lbl,
+.s11 .aud h3, .s11 .aud p,
+.s13 .c .label, .s13 .c .val,
+.stat .lbl, .note, .tsub, .cap{
+  word-break: keep-all;         /* 不在漢字之間亂斷 */
+  line-break: strict;           /* 中日文嚴格斷行規則 */
+  overflow-wrap: break-word;    /* 只在真正放不下時才換 */
+  text-wrap: pretty;
+}
+
+/* 防止 chrome 小字被斷行（它們都是短標籤） */
+.chrome-tl, .chrome-tr, .chrome-bl, .chrome-br,
+.footline, .tsub, .cap, .note,
+.stat .lbl, .s10 .spec .lbl, .s13 .c .label,
+.chapter, .eyebrow,
+.phtag{
+  white-space: nowrap;
+}
+
+/* 標題使用 <br> 控制斷行，禁止中間自動換行。
+   因為標題裡有「視覺空格」(多 數 的 A I)，若允許自動斷行會每個字斷一次。*/
+.s1 .title,
+.s2 .title, .s3 .title, .s4 .quote-big, .s5 .title,
+.s6 .hd .cn-big, .s7 .title,
+.s8 .title, .s9 .title, .s10 .title,
+.s11 .title, .s12 .big-quote, .s13 .title{
+  white-space: nowrap;   /* <br> 仍會生效 */
+}
+
+/* 內文段落要能自動換行（因為有些很長） */
+.body-copy, .intro, .warm, .follow, .dsc,
+.s6 .cell p, .s8 .step p, .s11 .aud p,
+.s9 .num-cell .dsc{
+  white-space: normal;
+}
+deck-stage section{
+  background:var(--ink);
+  color:var(--paper);
+  overflow:hidden;
+  position:relative;
+}
+
+/* Grain */
+.grain{
+  position:absolute; inset:0;
+  pointer-events:none;
+  opacity:.18;
+  mix-blend-mode:screen;
+  background-image:
+    radial-gradient(rgba(255,255,255,.16) 1px, transparent 1px),
+    radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
+  background-size:3px 3px, 7px 7px;
+  background-position:0 0, 1px 1px;
+  z-index:50;
+}
+
+/* Placeholder image frame */
+.ph{
+  background:#1a1d22;
+  background-size:cover;
+  background-position:center;
+  position:relative;
+  overflow:hidden;
+  outline:1px solid var(--line-strong);
+  outline-offset:-1px;
+  filter:grayscale(1) contrast(1.06);
+}
+.ph::after{
+  content:""; position:absolute; inset:0;
+  background:
+    repeating-linear-gradient(to bottom,
+      rgba(0,0,0,0) 0, rgba(0,0,0,0) 2px,
+      rgba(255,255,255,.03) 2px, rgba(255,255,255,.03) 3px);
+  pointer-events:none;
+}
+.ph .phtag{
+  position:absolute; top:14px; left:16px;
+  font-family:"Noto Serif TC",serif;
+  font-weight:500;
+  font-size:12px;
+  letter-spacing:.35em;
+  color:var(--paper);
+  opacity:.7;
+  z-index:2;
+}
+
+/* Corner chrome */
+.chrome-tl,.chrome-tr,.chrome-bl,.chrome-br{
+  position:absolute;
+  font-family:"Noto Serif TC",serif;
+  font-weight:500;
+  font-size:24px;
+  letter-spacing:.28em;
+  color:var(--paper);
+  opacity:.7;
+  z-index:10;
+}
+.chrome-tl{ top:48px; left:64px; }
+.chrome-tr{ top:48px; right:64px; text-align:right; }
+.chrome-bl{ bottom:48px; left:64px; }
+.chrome-br{ bottom:48px; right:64px; text-align:right; }
+
+.rule-top,.rule-bot{
+  position:absolute; left:64px; right:64px;
+  height:1px; background:var(--line-strong);
+  z-index:5;
+}
+.rule-top{ top:84px; }
+.rule-bot{ bottom:84px; }
+
+/* Gold hair rule */
+.gold-rule{
+  display:inline-block;
+  width:64px; height:2px;
+  background:var(--gold);
+  vertical-align:middle;
+  margin-right:20px;
+}
+
+/* Gold-only bits */
+.g{ color:var(--gold); }
+
+/* ═════ SHARED PAD ═════ */
+.pad{ padding:148px 90px 118px; position:absolute; inset:0; display:flex; flex-direction:column; }
+
+/* Shared header */
+.hd{
+  display:flex; justify-content:space-between; align-items:flex-end;
+  margin-bottom:50px; gap:40px;
+}
+.hd .cn-big{
+  font-family:"Noto Serif TC",serif;
+  font-weight:900;
+  font-size:120px;
+  line-height:.98;
+  letter-spacing:.02em;
+}
+.hd .cn-big em{
+  color:var(--gold);
+  font-style:normal;
+}
+.hd .cn-sub{
+  font-family:"Noto Serif TC",serif;
+  font-weight:500;
+  font-size:26px;
+  letter-spacing:.32em;
+  text-align:right;
+  opacity:.8;
+  max-width:520px;
+  line-height:1.6;
+}
+
+/* Body copy */
+.body-copy{
+  font-family:"Noto Serif TC",serif;
+  font-weight:400;
+  font-size:30px;
+  line-height:1.85;
+  color:var(--paper);
+  opacity:.92;
+  letter-spacing:.02em;
+}
+.body-copy em{
+  font-style:normal;
+  color:var(--gold);
+  font-weight:700;
+  letter-spacing:.05em;
+}
+
+/* Eyebrow chapter label */
+.chapter{
+  font-family:"Noto Serif TC",serif;
+  font-weight:700;
+  font-size:18px;
+  letter-spacing:.5em;
+  color:var(--gold);
+  margin-bottom:28px;
+  display:flex; align-items:center;
+}
+.chapter::before{
+  content:""; width:42px; height:1px;
+  background:var(--gold);
+  display:inline-block;
+  margin-right:20px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SLIDE 1 · COVER
+   ═══════════════════════════════════════════════════════════════ */
+.s1{ padding:0; }
+.s1 .hero{
+  position:absolute; inset:0;
+  display:grid;
+  grid-template-columns:1.3fr 1fr;
+}
+.s1 .left{
+  padding:150px 70px 130px 90px;
+  display:flex; flex-direction:column;
+  justify-content:space-between;
+  border-right:1px solid var(--line);
+  position:relative;
+}
+.s1 .right{
+  padding:150px 90px 130px 70px;
+  display:flex; flex-direction:column;
+  justify-content:space-between;
+  position:relative;
+}
+
+.s1 .chapter{ margin-bottom:40px; font-size:24px; }
+
+.s1 .title{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+.s1 .title .cn-label{
+  font-family:"Noto Serif TC",serif;
+  font-weight:500;
+  font-size:22px;
+  letter-spacing:.55em;
+  color:var(--paper);
+  opacity:.65;
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+.s1 .title .cn-label::before{
+  content:"";
+  display:inline-block;
+  width:36px; height:1px;
+  background:var(--gold);
+}
+.s1 .title .en{
+  display:block;
+  font-family:"Bodoni Moda",serif;
+  font-style:italic;
+  font-weight:900;
+  font-size:220px;
+  line-height:.88;
+  letter-spacing:-.03em;
+  color:var(--paper);
+}
+.s1 .title .en em{
+  color:var(--gold);
+  font-style:italic;
+}
+
+.s1 .sub{
+  margin-top:50px;
+  font-family:"Noto Serif TC",serif;
+  font-weight:400;
+  font-size:40px;
+  line-height:1.85;
+  color:var(--paper);
+  opacity:.95;
+  letter-spacing:.05em;
+  max-width:800px;
+  border-top:1px solid var(--line-strong);
+  padding-top:40px;
+}
+.s1 .sub em{
+  font-style:normal;
+  color:var(--gold);
+  font-weight:700;
+}
+
+.s1 .footline{
+  font-family:"Noto Serif TC",serif;
+  font-weight:500;
+  font-size:22px;
+  letter-spacing:.25em;
+  opacity:.8;
+  display:flex; align-items:center; gap:24px;
+}
+.s1 .footline .dot{
+  width:6px; height:6px; border-radius:999px;
+  background:var(--gold); display:inline-block;
+}
+
+.s1 .photo{
+  position:relative;
+  flex:1;
+  margin-bottom:40px;
+  max-height:620px;
+}
+.s1 .photo .ph{ width:100%; height:100%; }
+
+.s1 .monogram{
+  position:absolute;
+  right:-10px; top:-30px;
+  font-family:"Bodoni Moda",serif;
+  font-weight:900;
+  font-size:200px;
+  line-height:.85;
+  letter-spacing:-.05em;
+  color:var(--paper);
+  mix-blend-mode:difference;
+  z-index:3;
+}
+.s1 .monogram sup{
+  font-size:.42em; top:-.85em;
+  color:var(--gold);
+  font-style:italic;
+}
+
+.s1 .mark-block{
+  border-top:1px solid var(--line-strong);
+  padding-top:24px;
+  font-family:"Noto Serif TC",serif;
+  font-weight:900;
+  font-size:36px;
+  letter-spacing:.5em;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SLIDE 2 · 產業正在改變
+   ═══════════════════════════════════════════════════════════════ */
+.s2 .pad{ display:grid; grid-template-columns:1.15fr .85fr; gap:80px; }
+.s2 .l{ display:flex; flex-direction:column; justify-content:center; }
+.s2 .r{ display:flex; flex-direction:column; justify-content:flex-end; }
+.s2 .title .title-sub{
+  font-size:60px;
+  font-weight:700;
+  letter-spacing:.04em;
+  white-space:nowrap;
+}
+.s2 .title{
+  font-family:"Noto Serif TC",serif;
+  font-weight:900;
+  font-size:110px;
+  line-height:1.04;
+  letter-spacing:.02em;
+  margin-bottom:44px;
+}
+.s2 .title em{ font-style:normal; color:var(--gold); }
+.s2 .photo-tall{
+  width:100%;
+  aspect-ratio:3/4;
+  max-height:720px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SLIDE 3 · 但市場上有個問題
+   ═══════════════════════════════════════════════════════════════ */
+.s3 .pad{ display:grid; grid-template-columns: .7fr 1.3fr; gap:80px; }
+.s3 .l{ display:flex; flex-direction:column; justify-content:space-between; }
+.s3 .r{ display:flex; flex-direction:column; justify-content:center; }
+.s3 .photo-sq{ width:100%; aspect-ratio:1/1; }
+.s3 .stamp{
+  border:2px solid var(--gold);
+  color:var(--gold);
+  padding:18px 24px 16px;
+  display:inline-flex;
+  flex-direction:column;
+  align-self:flex-start;
+  transform:rotate(-4deg);
+  margin-top:30px;
+}
+.s3 .stamp .st{
+  font-family:"Noto Serif TC",serif;
+  font-weight:500; font-size:14px;
+  letter-spacing:.35em;
+  margin-bottom:6px;
+}
+.s3 .stamp .sm{
+  font-family:"Bodoni Moda",serif;
+  font-style:italic; font-weight:900;
+  font-size:52px; line-height:.95;
+  letter-spacing:-.02em;
+  color:var(--gold);
+}
+.s3 .title{
+  font-family:"Noto Serif TC",serif;
+  font-weight:900;
+  font-size:108px;
+  line-height:1.05;
+  letter-spacing:.02em;
+  margin-bottom:48px;
+}
+.s3 .title em{ font-style:normal; color:var(--gold); }
+.s3 .title .q{
+  font-family:"Bodoni Moda",serif;
+  font-style:italic;
+  color:var(--gold);
+  font-weight:900;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SLIDE 4 · 信念
+   ═══════════════════════════════════════════════════════════════ */
+.s4 .pad{ display:grid; grid-template-columns:1fr 1.4fr; gap:80px; }
+.s4 .l{ display:flex; flex-direction:column; justify-content:space-between; }
+.s4 .r{ display:flex; flex-direction:column; justify-content:center; position:relative; }
+.s4 .photo-p{ width:100%; aspect-ratio:3/4; max-height:660px; }
+.s4 .cap{
+  font-family:"Noto Serif TC",serif;
+  font-size:18px;
+  letter-spacing:.32em;
+  margin-top:16px;
+  opacity:.7;
+}
+.s4 .qm{
+  font-family:"Bodoni Moda",serif;
+  font-style:italic; font-weight:900;
+  font-size:220px;
+  line-height:.6;
+  color:var(--gold);
+  opacity:.3;
+  margin-bottom:12px;
+}
+.s4 .quote-big{
+  font-family:"Noto Serif TC",serif;
+  font-weight:900;
+  font-size:108px;
+  line-height:1.12;
+  letter-spacing:.01em;
+  margin-bottom:40px;
+}
+.s4 .quote-big em{ font-style:normal; color:var(--gold); }
+
+/* ═══════════════════════════════════════════════════════════════
+   SLIDE 5 · 關於
+   ═══════════════════════════════════════════════════════════════ */
+.s5 .pad{ padding:148px 90px 118px; }
+.s5 .top{
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:70px; align-items:flex-end;
+  margin-bottom:60px;
+}
+.s5 .title{
+  font-family:"Noto Serif TC",serif;
+  font-weight:900;
+  font-size:100px;
+  line-height:1.08;
+  letter-spacing:.02em;
+}
+.s5 .title em{ font-style:normal; color:var(--gold); }
+.s5 .stats{
+  display:grid; grid-template-columns:1fr 1fr 1fr;
+  gap:30px;
+  border-top:1px solid var(--line-strong);
+  padding-top:32px;
+}
+.s5 .stat .num{
+  font-family:"Bodoni Moda",serif;
+  font-style:italic; font-weight:900;
+  font-size:140px; line-height:.9;
+  color:var(--gold);
+}
+.s5 .stat .lbl{
+  font-family:"Noto Serif TC",serif;
+  font-weight:500;
+  font-size:20px;
+  letter-spacing:.3em;
+  margin-top:14px;
+  opacity:.85;
+}
+.s5 .photo-wide{
+  width:100%;
+  aspect-ratio:16/7;
+  flex:1;
+  max-height:320px;
+  margin-top:40px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SLIDE 6 · 四種影像
+   ═══════════════════════════════════════════════════════════════ */
+.s6 .grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:1fr 1fr;
+  flex:1;
+  min-height:0;
+  border-top:1px solid var(--line-strong);
+  border-left:1px solid var(--line-strong);
+}
+.s6 .hd .cn-big{ font-size:84px; }
+.s6 .pad{ padding-bottom:104px !important; }
+.s6 .cell{
+  padding:28px 34px 26px;
+  border-right:1px solid var(--line-strong);
+  border-bottom:1px solid var(--line-strong);
+  position:relative;
+  display:flex; flex-direction:column;
+  min-height:0;
+  overflow:hidden;
+}
+.s6 .cell .n{
+  font-family:"Bodoni Moda",serif;
+  font-style:italic; font-weight:900;
+  font-size:48px; line-height:.9;
+  color:var(--gold);
+  margin-bottom:12px;
+}
+.s6 .cell h3{
+  font-family:"Noto Serif TC",serif;
+  font-weight:900;
+  font-size:40px;
+  line-height:1.15;
+  margin-bottom:12px;
+}
+.s6 .cell p{
+  font-family:"Noto Serif TC",serif;
+  font-size:24px;
+  line-height:1.55;
+  color:var(--mute);
+  margin-bottom:16px;
+}
+.s6 .cell .mini{
+  margin-top:auto;
+  width:42%;
+  aspect-ratio:16/9;
+  align-self:flex-end;
+  flex:none;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SLIDE 7 · 優勢
+   ═══════════════════════════════════════════════════════════════ */
+.s7 .pad{ display:grid; grid-template-columns:1.3fr .9fr; gap:80px; }
+.s7 .l{ display:flex; flex-direction:column; justify-content:center; }
+.s7 .r{ display:flex; flex-direction:column; justify-content:flex-start; padding-top:20px; }
+.s7 .photo-p{ width:100%; aspect-ratio:4/5; }
+.s7 .title{
+  font-family:"Noto Serif TC",serif;
+  font-weight:900;
+  font-size:160px;
+  line-height:.98;
+  letter-spacing:.02em;
+  margin-bottom:42px;
+}
+.s7 .title em{ font-style:normal; color:var(--gold); }
+
+/* ═══════════════════════════════════════════════════════════════
+   SLIDE 8 · 流程
+   ═══════════════════════════════════════════════════════════════ */
+.s8 .title{
+  font-family:"Noto Serif TC",serif;
+  font-weight:900;
+  font-size:110px;
+  line-height:1;
+  letter-spacing:.02em;
+  margin-bottom:14px;
+}
+.s8 .title em{ font-style:normal; color:var(--gold); }
+.s8 .tsub{
+  font-family:"Noto Serif TC",serif;
+  font-weight:500;
+  font-size:24px;
+  letter-spacing:.32em;
+  opacity:.8;
+  margin-bottom:50px;
+}
+.s8 .timeline{
+  display:grid;
+  grid-template-columns:repeat(5, 1fr);
+  border-top:2px solid var(--gold);
+  border-bottom:2px solid var(--gold);
+  flex:1;
+}
+.s8 .step{
+  padding:32px 24px 24px;
+  border-right:1px solid var(--line);
+  display:flex; flex-direction:column;
+  position:relative;
+}
+.s8 .step:last-child{ border-right:0; }
+.s8 .step .days{
+  font-family:"Bodoni Moda",serif;
+  font-style:italic; font-weight:900;
+  font-size:20px;
+  letter-spacing:.1em;
+  color:var(--gold);
+  margin-bottom:14px;
+}
+.s8 .step .n{
+  font-family:"Bodoni Moda",serif;
+  font-style:italic; font-weight:900;
+  font-size:150px; line-height:.85;
+  margin-bottom:20px;
+}
+.s8 .step h3{
+  font-family:"Noto Serif TC",serif;
+  font-weight:900;
+  font-size:34px;
+  line-height:1.2;
+  margin-bottom:12px;
+}
+.s8 .step p{
+  font-family:"Noto Serif TC",serif;
+  font-size:20px;
+  line-height:1.6;
+  color:var(--mute);
+}
+.s8 .note{
+  font-family:"Noto Serif TC",serif;
+  font-weight:500;
+  font-size:22px;
+  letter-spacing:.18em;
+  color:var(--gold);
+  margin-top:30px;
+  text-align:right;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SLIDE 9 · 數字
+   ═══════════════════════════════════════════════════════════════ */
+.s9 .pad{ display:flex; flex-direction:column; }
+.s9 .title{
+  font-family:"Noto Serif TC",serif;
+  font-weight:900;
+  font-size:104px;
+  line-height:1.08;
+  letter-spacing:.02em;
+  margin-bottom:60px;
+  max-width:1500px;
+}
+.s9 .title em{ font-style:normal; color:var(--gold); }
+
+/* === CHART === */
+.s9 .chart{
+  flex:1;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:70px;
+  border-top:1px solid var(--line-strong);
+  padding-top:42px;
+}
+.s9 .chart .metric{
+  display:flex; flex-direction:column; gap:26px;
+}
+.s9 .chart .metric-head{
+  display:flex; justify-content:space-between; align-items:baseline;
+  border-bottom:1px solid var(--line);
+  padding-bottom:14px;
+}
+.s9 .chart .metric-head .m-title{
+  font-family:"Noto Serif TC",serif;
+  font-weight:700;
+  font-size:30px;
+  letter-spacing:.22em;
+}
+.s9 .chart .metric-head .m-ratio{
+  font-family:"Bodoni Moda",serif;
+  font-style:italic; font-weight:900;
+  font-size:56px;
+  color:var(--gold);
+  letter-spacing:-.02em;
+}
+.s9 .chart .bar-row{
+  display:grid;
+  grid-template-columns:200px 1fr;
+  gap:24px;
+  align-items:center;
+}
+.s9 .chart .bar-row .bl{
+  font-family:"Noto Serif TC",serif;
+  font-weight:500;
+  font-size:19px;
+  letter-spacing:.26em;
+  opacity:.75;
+  text-align:right;
+}
+.s9 .chart .bar-wrap{
+  position:relative;
+  height:54px;
+  display:flex; align-items:center;
+}
+.s9 .chart .bar{
+  height:100%;
+  position:relative;
+  display:flex; align-items:center;
+  padding:0 20px;
+}
+.s9 .chart .bar.trad{
+  background:rgba(239,236,230,.1);
+  width:100%;
+  border:1px solid rgba(239,236,230,.18);
+}
+.s9 .chart .bar.n2{
+  background:var(--gold);
+  color:var(--ink);
+}
+.s9 .chart .bar .bv{
+  font-family:"Bodoni Moda",serif;
+  font-style:italic; font-weight:900;
+  font-size:32px;
+  letter-spacing:-.01em;
+  white-space:nowrap;
+}
+.s9 .chart .bar.trad .bv{ color:var(--paper); }
+.s9 .chart .footer-note{
+  grid-column:1/-1;
+  font-family:"Noto Serif TC",serif;
+  font-size:20px;
+  line-height:1.7;
+  color:var(--mute);
+  border-top:1px solid var(--line);
+  padding-top:22px;
+  margin-top:10px;
+  max-width:1500px;
+}
+.s9 .chart .footer-note em{
+  font-style:normal;
+  color:var(--gold);
+  font-weight:700;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SLIDE 10 · 交付物
+   ═══════════════════════════════════════════════════════════════ */
+.s10 .pad{ display:grid; grid-template-columns:1.1fr 1fr; gap:70px; }
+.s10 .l{ display:flex; flex-direction:column; justify-content:center; }
+.s10 .r{ display:flex; flex-direction:column; justify-content:space-between; }
+.s10 .title{
+  font-family:"Noto Serif TC",serif;
+  font-weight:900;
+  font-size:80px;
+  line-height:1.08;
+  letter-spacing:.02em;
+  margin-bottom:24px;
+}
+.s10 .title em{ font-style:normal; color:var(--gold); }
+.s10 .intro{
+  font-family:"Noto Serif TC",serif;
+  font-size:22px;
+  line-height:1.65;
+  color:var(--paper); opacity:.9;
+  margin-bottom:22px;
+}
+.s10 .specs{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+.s10 .spec{
+  border:1px solid var(--line-strong);
+  padding:20px 18px;
+  text-align:center;
+}
+.s10 .spec .k{
+  font-family:"Bodoni Moda",serif;
+  font-style:italic; font-weight:900;
+  font-size:48px; line-height:1;
+  color:var(--gold);
+}
+.s10 .spec .lbl{
+  font-family:"Noto Serif TC",serif;
+  font-weight:500;
+  font-size:16px;
+  letter-spacing:.3em;
+  margin-top:10px;
+  opacity:.85;
+}
+.s10 .deliv-list{
+  list-style:none;
+  margin-top:16px;
+}
+.s10 .deliv-list li{
+  font-family:"Noto Serif TC",serif;
+  font-size:18px;
+  padding:6px 0;
+  border-bottom:1px solid var(--line);
+  display:flex; align-items:baseline; gap:18px;
+}
+.s10 .deliv-list li::before{
+  content:"";
+  width:8px; height:8px;
+  background:var(--gold);
+  display:inline-block;
+  flex:none;
+  transform:translateY(-4px);
+}
+.s10 .photo-big{ width:100%; aspect-ratio:4/5; }
+
+/* ═══════════════════════════════════════════════════════════════
+   SLIDE 11 · 服務客戶
+   ═══════════════════════════════════════════════════════════════ */
+.s11 .pad{ display:flex; flex-direction:column; }
+.s11 .top{
+  display:flex; justify-content:space-between; align-items:flex-end;
+  margin-bottom:40px; gap:40px;
+}
+.s11 .title{
+  font-family:"Noto Serif TC",serif;
+  font-weight:900;
+  font-size:108px;
+  line-height:1.05;
+  letter-spacing:.02em;
+}
+.s11 .title em{ font-style:normal; color:var(--gold); }
+.s11 .intro{
+  font-family:"Noto Serif TC",serif;
+  font-size:28px;
+  line-height:1.7;
+  max-width:620px;
+  color:var(--paper); opacity:.9;
+  text-align:right;
+}
+.s11 .audience{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+  flex:1;
+  margin-top:40px;
+}
+.s11 .aud{
+  border-top:2px solid var(--gold);
+  padding:32px 24px 30px;
+  position:relative;
+  display:flex; flex-direction:column;
+}
+.s11 .aud .idx{
+  font-family:"Bodoni Moda",serif;
+  font-style:italic; font-weight:900;
+  font-size:28px;
+  color:var(--gold);
+  margin-bottom:16px;
+  letter-spacing:.05em;
+}
+.s11 .aud h3{
+  font-family:"Noto Serif TC",serif;
+  font-weight:900;
+  font-size:40px;
+  line-height:1.2;
+  margin-bottom:14px;
+}
+.s11 .aud p{
+  font-family:"Noto Serif TC",serif;
+  font-size:22px;
+  line-height:1.6;
+  color:var(--mute);
+}
+.s11 .aud .ph-mini{
+  margin-top:auto;
+  width:100%;
+  aspect-ratio:4/3;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SLIDE 12 · 護城河
+   ═══════════════════════════════════════════════════════════════ */
+.s12 .pad{ display:flex; flex-direction:column; justify-content:center; padding:148px 90px 118px; }
+.s12 .qm{
+  font-family:"Bodoni Moda",serif;
+  font-style:italic; font-weight:900;
+  font-size:260px; line-height:.7;
+  color:var(--gold);
+  opacity:.28;
+  margin-bottom:10px;
+}
+.s12 .big-quote{
+  font-family:"Noto Serif TC",serif;
+  font-weight:900;
+  font-size:132px;
+  line-height:1.15;
+  letter-spacing:.01em;
+  max-width:1700px;
+  margin-bottom:50px;
+}
+.s12 .big-quote em{ font-style:normal; color:var(--gold); }
+.s12 .follow{
+  font-family:"Noto Serif TC",serif;
+  font-size:32px;
+  line-height:1.7;
+  color:var(--paper);
+  opacity:.88;
+  max-width:1250px;
+  border-top:1px solid var(--line-strong);
+  padding-top:34px;
+}
+.s12 .ph-strip{
+  position:absolute;
+  right:90px; bottom:170px;
+  width:340px; height:200px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SLIDE 13 · 邀請
+   ═══════════════════════════════════════════════════════════════ */
+.s13 .pad{ display:grid; grid-template-columns:1.3fr 1fr; gap:80px; overflow:hidden; }
+.s13 .l{ display:flex; flex-direction:column; justify-content:space-between; min-height:0; overflow:hidden; }
+.s13 .r{ display:flex; flex-direction:column; justify-content:flex-end; min-height:0; }
+.s13 .photo-p{ width:100%; aspect-ratio:3/4; max-height:100%; }
+.s13 .title{
+  font-family:"Noto Serif TC",serif;
+  font-weight:900;
+  font-size:108px;
+  line-height:1.05;
+  letter-spacing:.02em;
+  margin-bottom:36px;
+}
+.s13 .title em{ font-style:normal; color:var(--gold); }
+.s13 .warm{
+  font-family:"Noto Serif TC",serif;
+  font-size:26px;
+  line-height:1.7;
+  color:var(--paper); opacity:.92;
+  max-width:840px;
+  border-top:1px solid var(--line-strong);
+  padding-top:26px;
+  margin-bottom:36px;
+}
+.s13 .contacts{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:28px 50px;
+  border-top:2px solid var(--gold);
+  padding-top:32px;
+}
+.s13 .c .label{
+  font-family:"Noto Serif TC",serif;
+  font-weight:500;
+  font-size:16px;
+  letter-spacing:.35em;
+  color:var(--gold);
+  margin-bottom:12px;
+}
+.s13 .c .val{
+  font-family:"Noto Serif TC",serif;
+  font-weight:700;
+  font-size:28px;
+  letter-spacing:.03em;
+}
+.s13 .sign{
+  font-family:"Bodoni Moda",serif;
+  font-style:italic; font-weight:900;
+  font-size:44px;
+  line-height:1;
+  color:var(--gold);
+  letter-spacing:-.02em;
+  margin-top:12px;
+  text-align:right;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SLIDE 11b · 合作品牌
+   ═══════════════════════════════════════════════════════════════ */
+.s11b .pad{ display:flex; flex-direction:column; }
+.s11b .title{
+  font-family:"Noto Serif TC",serif;
+  font-weight:900;
+  font-size:100px;
+  line-height:1.08;
+  letter-spacing:.02em;
+  margin-bottom:44px;
+}
+.s11b .title em{ font-style:normal; color:var(--gold); }
+.s11b .logo-grid{
+  display:flex; flex-wrap:wrap; gap:0;
+  border-top:1px solid var(--line-strong);
+  border-left:1px solid var(--line-strong);
+  margin-bottom:40px;
+}
+.s11b .logo-cell{
+  width:calc(100% / 7);
+  border-right:1px solid var(--line-strong);
+  border-bottom:1px solid var(--line-strong);
+  padding:18px 14px;
+  display:flex; align-items:center; justify-content:center;
+  min-height:96px;
+  background:#f5f3ee;
+}
+.s11b .logo-cell span{
+  font-family:"Noto Serif TC",serif;
+  font-weight:700;
+  font-size:17px;
+  letter-spacing:.12em;
+  text-align:center;
+  opacity:.85;
+  line-height:1.35;
+}
+.s11b .logo-cell img{
+  height:52px;
+  width:auto;
+  max-width:92%;
+  object-fit:contain;
+}
+.s11b .works{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+  flex:1;
+  min-height:0;
+}
+.s11b .work-card{
+  display:flex; flex-direction:column;
+  min-height:0; overflow:hidden;
+}
+.s11b .work-card .ph{
+  flex:1; min-height:0;
+  aspect-ratio:16/9;
+}
+.s11b .work-card .cap{
+  font-family:"Noto Serif TC",serif;
+  font-weight:500;
+  font-size:18px;
+  letter-spacing:.15em;
+  margin-top:12px;
+  opacity:.82;
+  white-space:normal;
+  line-height:1.5;
+}
+</style>
+
+<script type="application/json" id="speaker-notes">
+["","","","","","","","","","","","","",""]
+</script>
+</head>
+<body>
+
+<deck-stage width="1920" height="1080">
+
+  <!-- 01 · COVER -->
+  <section class="s1" data-label="封面">
+    <div class="grain"></div>
+    <div class="rule-top"></div>
+    <div class="rule-bot"></div>
+    <div class="chrome-tl">台 北 · 二 〇 二 六</div>
+    <div class="chrome-tr">品 牌 影 像 製 作</div>
+    <div class="chrome-bl">三 度 金 鐘 入 圍 團 隊</div>
+    <div class="chrome-br">A I 影 像 新 世 代</div>
+
+    <div class="hero">
+      <div class="left">
+        <div class="title">
+          <span class="cn-label"></span>
+          <span class="en">N2<em> Media</em></span>
+        </div>
+
+        <div class="sub">
+          用 <em>說 劇 本 的 眼 光</em>，<br>
+          做 <em>A I 世 代</em> 的 影 像 。
+        </div>
+
+        <div class="footline">
+          <span class="dot"></span>
+          二 〇 一 八 年 成 立 於 台 北
+        </div>
+      </div>
+
+      <div class="right">
+        <div class="photo">
+          <div class="ph" style="background-image:url('assets/01-電影放映機.png');background-position:center 30%">
+            
+          </div>
+          <div class="monogram">N<sup>2</sup></div>
+        </div>
+        <div class="mark-block">恩 次 方 文 化 創 意</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 · 產業正在改變 -->
+  <section class="s2" data-label="產業正在改變">
+    <div class="grain"></div>
+    <div class="rule-top"></div>
+    <div class="rule-bot"></div>
+    <div class="chrome-tl">〇 二 · 趨 勢</div>
+    <div class="chrome-tr">新 的 時 代</div>
+    <div class="chrome-bl">產 業 正 在 改 變</div>
+    <div class="chrome-br">—</div>
+
+    <div class="pad">
+      <div class="l">
+        <div class="chapter">〇 二 · 產 業 觀 察</div>
+        <div class="title">影 像 製 作 <br><span class="title-sub">正 走 進 <em>新 的 時 代</em></span></div>
+        <div class="body-copy">
+          以往一支高階廣告片需要百萬預算、數月工時、層層審核。<br>現在，<em>A I 正 在 重 寫 規 則</em>。<br>看懂這波趨勢的品牌，將主導下一個十年的品牌敘事。
+        </div>
+      </div>
+      <div class="r">
+        <div class="ph photo-tall" style="background-image:url('assets/14-復古剪輯桌.png');">
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 · 市場有個問題 -->
+  <section class="s3" data-label="市場的問題">
+    <div class="grain"></div>
+    <div class="rule-top"></div>
+    <div class="rule-bot"></div>
+    <div class="chrome-tl">〇 三 · 現 況</div>
+    <div class="chrome-tr">市 場 觀 察</div>
+    <div class="chrome-bl">但 ⋯ ⋯</div>
+    <div class="chrome-br">—</div>
+
+    <div class="pad">
+      <div class="l">
+        <div class="ph photo-sq" style="background-image:url('assets/16-彩色迷你帶.png');">
+          
+        </div>
+        <div class="stamp">
+          <div class="st">問 題 所 在</div>
+          <div class="sm">看 起 來 就 很 A I</div>
+        </div>
+      </div>
+      <div class="r">
+        <div class="chapter">〇 三 · 但 市 場 上 有 個 問 題</div>
+        <div class="title">多 數 的 A I 影 片，<br>看 起 來 很 <em>「A I」</em>。</div>
+        <div class="body-copy">
+          空洞、生硬、沒有記憶點。靠 <em>p r o m p t 亂 槍 打 鳥</em>，產出的是「素材」，不是「故事」。您的品牌，值得更細緻的呈現。
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 · 信念 -->
+  <section class="s4" data-label="信念">
+    <div class="grain"></div>
+    <div class="rule-top"></div>
+    <div class="rule-bot"></div>
+    <div class="chrome-tl">〇 四 · 信 念</div>
+    <div class="chrome-tr">我 們 的 立 場</div>
+    <div class="chrome-bl">A I 只 是 工 具</div>
+    <div class="chrome-br">劇 本，才 是 主 角</div>
+
+    <div class="pad">
+      <div class="l">
+        <div class="ph photo-p" style="background-image:url('assets/02-故事板.png');background-position:center 40%">
+          
+        </div>
+        <div class="cap">— 現 場 · 製 作 中</div>
+      </div>
+      <div class="r">
+        <div class="qm">「</div>
+        <div class="quote-big">
+          A I 是 <em>工 具</em>，<br>
+          不 會 說 <em>劇 本</em> 。
+        </div>
+        <div class="body-copy">
+          工具再進步，也取代不了<em>懂 得 劇 本 的 人</em>。真正打動人心的影片，來自有劇本、有角色、有節奏的團隊。
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 · 關於恩次方 -->
+  <section class="s5" data-label="關於">
+    <div class="grain"></div>
+    <div class="rule-top"></div>
+    <div class="rule-bot"></div>
+    <div class="chrome-tl">〇 五 · 關 於 我 們</div>
+    <div class="chrome-tr">恩 次 方 文 化 創 意</div>
+    <div class="chrome-bl">深 耕 台 灣 八 年</div>
+    <div class="chrome-br">迎 向 新 世 代</div>
+
+    <div class="pad">
+      <div class="top">
+        <div>
+          <div class="chapter">〇 五 · 關 於 恩 次 方 文 化 創 意</div>
+          <div class="title">深 耕 台 灣 <em>八 年</em>，<br>如 今 迎 向 新 世 代 。</div>
+        </div>
+        <div class="body-copy">
+          自 2018 年起深耕影像製作，曾以旅遊節目與網路節目<em>三 度 入 圍 金 鐘 獎</em>。二〇二六全面轉型 AI 影像，把多年累積的故事力、選角力、剪輯力，<br>帶進 AI 原生的製作流程。
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat">
+          <div class="num">8<span style="font-size:.5em;font-style:normal;font-family:'Noto Serif TC',serif;font-weight:700;color:var(--paper);margin-left:8px;">年</span></div>
+          <div class="lbl">影 像 製 作 經 驗</div>
+        </div>
+        <div class="stat">
+          <div class="num">2018</div>
+          <div class="lbl">成 立 於 台 北</div>
+        </div>
+        <div class="stat">
+          <div class="num">3x</div>
+          <div class="lbl">金 鐘 獎 入 圍</div>
+        </div>
+      </div>
+      <div class="ph photo-wide" style="background-image:url('assets/09-片場燈具.png');background-position:center 20%;;margin:30px 0px 0px">
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 · 四種影像 -->
+  <section class="s6" data-label="四種影像">
+    <div class="grain"></div>
+    <div class="rule-top"></div>
+    <div class="rule-bot"></div>
+    <div class="chrome-tl">〇 六 · 製 作 內 容</div>
+    <div class="chrome-tr">四 種 影 像</div>
+    <div class="chrome-bl">都 有 電 影 感</div>
+    <div class="chrome-br">—</div>
+
+    <div class="pad">
+      <div class="hd">
+        <div class="cn-big">四 種 影 像，<br>都 有 <em>令 人 難 忘</em> 的 劇 本 感 。</div>
+        <div class="cn-sub">恩 次 方 文 化 創 意 主 要 的 四 個 製 作 方 向</div>
+      </div>
+      <div class="grid">
+        <div class="cell">
+          <div class="n">壹</div>
+          <h3>品 牌 形 象 片</h3>
+          <p>讓品牌「被記住」。凝鍊世界觀、情感基調與視覺印象，成為品牌最具代表性的一支主片。</p>
+          <div class="ph mini" style="background-image:url('assets/05-攝影機套件.png');"></div>
+        </div>
+        <div class="cell">
+          <div class="n">貳</div>
+          <h3>產 品 廣 告 片</h3>
+          <p>短影音格式、可測試、可規模化。以少勝多，適合社群與廣告平台投放。</p>
+          <div class="ph mini" style="background-image:url('assets/08-彩色濾鏡.png');"></div>
+        </div>
+        <div class="cell">
+          <div class="n">參</div>
+          <h3>新 品 發 表 片</h3>
+          <p>圍繞單一產品，打造一整個視覺世界。從概念到上市，完整敘事。</p>
+          <div class="ph mini" style="background-image:url('assets/04-場記板劇本.png');"></div>
+        </div>
+        <div class="cell">
+          <div class="n">肆</div>
+          <h3>品 牌 微 電 影 · 原 生 內 容</h3>
+          <p>長格式、多平台適配。深度敘事，適合建立品牌的情感資產。</p>
+          <div class="ph mini" style="background-image:url('assets/10-工作燈.png');"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 · 優勢 -->
+  <section class="s7" data-label="我們的優勢">
+    <div class="grain"></div>
+    <div class="rule-top"></div>
+    <div class="rule-bot"></div>
+    <div class="chrome-tl">〇 七 · 我 們 的 優 勢</div>
+    <div class="chrome-tr">從 劇 本 開 始</div>
+    <div class="chrome-bl">劇 本，是 根</div>
+    <div class="chrome-br">—</div>
+
+    <div class="pad">
+      <div class="l">
+        <div class="chapter">〇 七 · 我 們 的 優 勢</div>
+        <div class="title" style="white-space:normal;font-size:140px;">我們，<br>從<em>劇本</em>開始。</div>
+        <div class="body-copy">
+          在任何 AI 工具啟動之前，我們先架構劇本——<br><em>角 色、衝 突、視 覺 隱 喻</em>。<br>這是為什麼我們的作品看起來像電影，而不只是「內容」；也是客戶願意一次又一次回來合作的原因。
+        </div>
+      </div>
+      <div class="r">
+        <div class="ph photo-p" style="background-image:url('assets/03-劇本文件夾.png');">
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 · 流程 -->
+  <section class="s8" data-label="製作流程">
+    <div class="grain"></div>
+    <div class="rule-top"></div>
+    <div class="rule-bot"></div>
+    <div class="chrome-tl">〇 八 · 製 作 流 程</div>
+    <div class="chrome-tr">五 步</div>
+    <div class="chrome-bl">從 簡 報 到 上 線</div>
+    <div class="chrome-br">—</div>
+
+    <div class="pad">
+      <div class="title">從 簡 報 到 上 線，<br>只 要 <em>五 步</em> 。</div>
+      <div class="tsub">多 數 專 案 · 兩 週 內 交 片</div>
+      <!-- 右上角裝飾照片 -->
+      <div style="
+        position:absolute;
+        top:148px; right:90px;
+        width:280px; height:340px;
+        background-image:url('assets/12-場記夾對講機.png');
+        background-size:cover;
+        background-position:center;
+        filter:contrast(1.06);
+        outline:1px solid rgba(239,236,230,.2);
+        outline-offset:-1px;
+      "></div>
+      <div class="timeline">
+        <div class="step">
+          <div class="days">第 1 – 2 天</div>
+          <div class="n">1</div>
+          <h3>需求訪談與策略</h3>
+          <p>釐清品牌目標、受眾、風格方向與成功指標。</p>
+        </div>
+        <div class="step">
+          <div class="days">第 3 – 5 天</div>
+          <div class="n">2</div>
+          <h3>劇 本 與 分 鏡</h3>
+          <p>敘事結構、鏡頭語言、視覺節奏一次定調。</p>
+        </div>
+        <div class="step">
+          <div class="days">第 6 – 9 天</div>
+          <div class="n">3</div>
+          <h3>AI 生成 · 剪輯 · 聲音 · 調色</h3>
+          <p>從生成到後製一氣呵成，由懂故事的人全程把關。</p>
+        </div>
+        <div class="step">
+          <div class="days">第 10 天 起</div>
+          <div class="n">4</div>
+          <h3>交 付 上 線</h3>
+          <p>多平台規格輸出，同步交付。</p>
+        </div>
+        <div class="step">
+          <div class="days"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;"><path d="M17 2l4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg></div>
+          <div class="n">5</div>
+          <h3>修 改 · 最 多 三 次</h3>
+          <p>我們提供三輪修改，確保成品完全符合您的期待。</p>
+        </div>
+      </div>
+      <div class="note">— 多 數 專 案 · 兩 週 內 完 成 交 片</div>
+    </div>
+  </section>
+
+  <!-- 09 · 數字會說話 -->
+  <section class="s9" data-label="數字">
+    <div class="grain"></div>
+    <div class="rule-top"></div>
+    <div class="rule-bot"></div>
+    <div class="chrome-tl">〇 九 · 數 字 會 說 話</div>
+    <div class="chrome-tr">比 較</div>
+    <div class="chrome-bl">同 等 規 格 · 傳 統 製 作</div>
+    <div class="chrome-br">—</div>
+
+    <div class="pad">
+      <div class="title" style="font-size:84px;margin-bottom:44px;">用 意 料 之 外 的 預 算，<br>做 出 <em>心 目 中</em> 的 影 像 。</div>
+      <div class="chart" style="flex:0 0 auto;gap:60px;border-top:1px solid var(--line-strong);padding-top:34px;margin-bottom:40px;">
+        <div class="metric">
+          <div class="metric-head">
+            <div class="m-title">預 算</div>
+            <div class="m-ratio">1 / 5</div>
+          </div>
+          <div class="bar-row">
+            <div class="bl">傳 統 製 作</div>
+            <div class="bar-wrap"><div class="bar trad"><span class="bv">30 – 50 萬</span></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bl">恩 次 方</div>
+            <div class="bar-wrap"><div class="bar n2" style="width:auto;min-width:20%;"><span class="bv" style="white-space:nowrap;">六 – 十 萬</span></div></div>
+          </div>
+        </div>
+        <div class="metric">
+          <div class="metric-head">
+            <div class="m-title">時 間</div>
+            <div class="m-ratio">1 / 6</div>
+          </div>
+          <div class="bar-row">
+            <div class="bl">傳 統 工 時</div>
+            <div class="bar-wrap"><div class="bar trad"><span class="bv">8 – 12 週</span></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bl">恩 次 方</div>
+            <div class="bar-wrap"><div class="bar n2" style="width:auto;min-width:16.7%;"><span class="bv" style="white-space:nowrap;">1 – 2 週</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div style="
+        font-family:'Noto Serif TC',serif;
+        font-size:30px;
+        line-height:1.8;
+        color:var(--paper);
+        opacity:.9;
+        border-top:1px solid var(--line-strong);
+        padding-top:34px;
+        max-width:1600px;
+      ">
+        省下的預算與時間，您可以製作更多版本、更多 A/B 測試、更多觸及潛在客戶的機會。<br>
+        市場上 AI 影片的價格從幾千到幾十萬都有，差別不在工具，而在 <em style="font-style:normal;color:var(--gold);font-weight:700;">是 否 有 人 替 您 把 關 故 事</em>。
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 · 版權歸客戶所有 -->
+  <section class="s10" data-label="版權歸屬">
+    <div class="grain"></div>
+    <div class="rule-top"></div>
+    <div class="rule-bot"></div>
+    <div class="chrome-tl">一 〇 · 版 權 歸 屬</div>
+    <div class="chrome-tr">權 利 · 全 部 歸 您</div>
+    <div class="chrome-bl">我 們 只 是 幫 您 完 成 作 品</div>
+    <div class="chrome-br">—</div>
+
+    <div class="pad">
+      <div class="l">
+        <div class="chapter">一 〇 · 版 權 歸 屬</div>
+        <div class="title">影 片 的 權 利，<br><em>全 部 歸 您</em>。</div>
+        <div class="intro" style="font-size:28px;line-height:1.75;margin-top:16px;max-width:820px;">
+          <em style="font-style:normal;color:var(--gold);font-weight:700;">著 作 權 與 使 用 權 皆 歸 客 戶 所 有</em><br>
+          作品是您的 ——<em style="font-style:normal;color:var(--gold);font-weight:700;">我 們 只 是 協 助 您 完 成</em>
+        </div>
+        <ul class="deliv-list" style="margin-top:40px;">
+          <li>著 作 權 · 完 整 歸 客 戶 所 有</li>
+          <li>使 用 權 · 無 時 效 · 無 地 域 · 無 媒 介 限 制</li>
+          <li>恩 次 方 · 不 保 留 任 何 後 續 使 用 權 利</li>
+          <li>比 照 一 般 節 目 製 作 · 讓 您 的 故 事 · 成 為 您 的 資 產</li>
+        </ul>
+      </div>
+      <div class="r">
+        <div class="ph photo-big" style="background-image:url('assets/07-鏡頭箱.png');">
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11b · 合作品牌 -->
+  <section class="s11b" data-label="合作品牌">
+    <div class="grain"></div>
+    <div class="rule-top"></div>
+    <div class="rule-bot"></div>
+    <div class="chrome-tl">一 一 · 合 作 品 牌</div>
+    <div class="chrome-tr">部 分 客 戶 列 表</div>
+    <div class="chrome-bl">航 空 · 觀 光 · 消 費 · 科 技</div>
+    <div class="chrome-br">—</div>
+
+    <div class="pad">
+      <div class="chapter">一 一 · 合 作 品 牌 與 廠 商</div>
+      <div class="title">合 作 <em>品 牌</em> 與 <em>廠 商</em></div>
+
+      <div class="logo-grid">
+        <div class="logo-cell"><img src="assets/logos/yamaha.png" alt="YAMAHA"></div>
+        <div class="logo-cell"><img src="assets/logos/line.png" alt="LINE"></div>
+        <div class="logo-cell"><img src="assets/logos/pizza-hut.png" alt="Pizza Hut"></div>
+        <div class="logo-cell"><img src="assets/logos/peach-aviation.png" alt="Peach Aviation"></div>
+        <div class="logo-cell"><img src="assets/logos/tigerair-taiwan.png" alt="Tigerair Taiwan"></div>
+        <div class="logo-cell"><img src="assets/logos/china-airlines-v4.png" alt="China Airlines"></div>
+        <div class="logo-cell"><img src="assets/logos/star-cruises.png" alt="Star Cruises"></div>
+        <div class="logo-cell"><img src="assets/logos/gomaji-v3.png" alt="GoMaji"></div>
+        <div class="logo-cell"><img src="assets/logos/bomy.svg" alt="Bomy"></div>
+        <div class="logo-cell"><img src="assets/logos/tainan-tourism.png" alt="Tainan Tourism"></div>
+        <div class="logo-cell"><img src="assets/logos/taoyuan-tourism-v2.png" alt="Taoyuan Tourism"></div>
+        <div class="logo-cell"><img src="assets/logos/taipei-tourism-v2.png" alt="Taipei Tourism"></div>
+        <div class="logo-cell"><img src="assets/logos/kaohsiung-tourism-v2.png" alt="Kaohsiung Tourism"></div>
+        <div class="logo-cell"><img src="assets/logos/pingtung-tourism.png" alt="Pingtung Tourism"></div>
+      </div>
+
+      <div class="works">
+        <div class="work-card">
+          <div class="ph" style="background-image:url('assets/11-收音器材.png');">
+            
+          </div>
+        </div>
+        <div class="work-card">
+          <div class="ph" style="background-image:url('assets/12-場記夾對講機.png');">
+            
+          </div>
+        </div>
+        <div class="work-card">
+          <div class="ph" style="background-image:url('assets/06-鏡頭組.png');">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 · 最終 CTA -->
+  <section class="s11" data-label="誠摯邀請">
+    <div class="grain"></div>
+    <div class="rule-top"></div>
+    <div class="rule-bot"></div>
+    <div class="chrome-tl">一 一 · 誠 摯 邀 請</div>
+    <div class="chrome-tr">聯 絡 我 們</div>
+    <div class="chrome-bl">台 北 · 服 務 全 台 灣</div>
+    <div class="chrome-br">—</div>
+
+    <div class="pad">
+      <div class="top">
+        <div class="title">下 一 支 <em>打 動 人 心</em> 的 廣 告，<br>交 給 <em>我 們</em> 。</div>
+        <div class="intro">
+          無論您手上已有明確的專案，或只是想先交換想法，<br>我們都樂意為您安排一次見面或線上對談。<br><em style="font-style:normal;color:var(--gold);font-weight:700;">讓 我 們 · 一 起 把 故 事 說 好 。</em>
+        </div>
+      </div>
+      <div class="audience" style="grid-template-columns:1fr;max-width:900px;margin:60px auto 0;">
+        <div class="aud" style="text-align:center;align-items:center;">
+          <div class="idx" style="font-size:32px;">◐</div>
+          <h3>官 方 網 站</h3>
+          <p style="font-size:42px;letter-spacing:.06em;color:var(--paper);opacity:.95;font-family:'Bodoni Moda',serif;font-style:italic;font-weight:700;">www.n2-media.com</p>
+          <div class="ph ph-mini" style="background-image:url('assets/16-彩色迷你帶.png');max-width:520px;margin:0 auto;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</deck-stage>
+
+<!-- ─── Tweaks Panel ─────────────────────────────────────────── -->
+<div id="tweaksPanel" style="display:none;">
+  <div class="tw-head">
+    <div class="tw-title">Tweaks</div>
+    <div class="tw-sub">即 時 調 整 · Live Controls</div>
+  </div>
+  <div class="tw-body">
+    <div class="tw-row">
+      <label>主 色</label>
+      <div class="tw-swatches" id="tw-accent"></div>
+    </div>
+    <div class="tw-row">
+      <label>底 色</label>
+      <div class="tw-swatches" id="tw-bg"></div>
+    </div>
+    <div class="tw-row">
+      <label>正 文 字 型</label>
+      <select id="tw-font">
+        <option value="serif">思源宋體（編輯風）</option>
+        <option value="sans">思源黑體（現代感）</option>
+      </select>
+    </div>
+    <div class="tw-row">
+      <label>顆 粒 強 度 <span class="tw-val" id="tw-grain-v">18</span>%</label>
+      <input type="range" id="tw-grain" min="0" max="40" step="1">
+    </div>
+    <div class="tw-row">
+      <label>標 題 字 重 <span class="tw-val" id="tw-weight-v">900</span></label>
+      <input type="range" id="tw-weight" min="500" max="900" step="100">
+    </div>
+    <div class="tw-row">
+      <label>劇 照 · 色 彩 飽 和 <span class="tw-val"><span id="tw-sat-v">0</span>% 彩 色</span></label>
+      <input type="range" id="tw-sat" min="0" max="100" step="1">
+      <div class="tw-scale"><span>黑 白</span><span>彩 色</span></div>
+    </div>
+  </div>
+</div>
+
+<style>
+#tweaksPanel{
+  position:fixed; right:20px; bottom:20px;
+  width:320px;
+  background:rgba(11,13,16,.94);
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(201,169,106,.35);
+  color:#efece6;
+  font-family:"Noto Sans TC",sans-serif;
+  z-index:2147483647;
+  box-shadow:0 20px 60px rgba(0,0,0,.6);
+}
+#tweaksPanel .tw-head{
+  padding:18px 20px 14px;
+  border-bottom:1px solid rgba(201,169,106,.3);
+}
+#tweaksPanel .tw-title{
+  font-family:"Noto Serif TC",serif;
+  font-weight:900; font-size:20px;
+  letter-spacing:.15em;
+  color:#c9a96a;
+}
+#tweaksPanel .tw-sub{
+  font-size:11px; letter-spacing:.25em;
+  opacity:.6; margin-top:4px;
+}
+#tweaksPanel .tw-body{ padding:16px 20px 20px; }
+#tweaksPanel .tw-row{
+  margin-bottom:16px;
+  display:flex; flex-direction:column; gap:8px;
+}
+#tweaksPanel label{
+  font-size:12px; letter-spacing:.2em;
+  opacity:.8; font-weight:500;
+  display:flex; justify-content:space-between;
+  align-items:center;
+}
+#tweaksPanel .tw-val{
+  color:#c9a96a; font-weight:700;
+  letter-spacing:.05em;
+}
+#tweaksPanel .tw-swatches{
+  display:flex; gap:8px;
+}
+#tweaksPanel .tw-swatches button{
+  width:30px; height:30px;
+  border-radius:999px;
+  border:2px solid transparent;
+  cursor:pointer;
+  transition:transform .15s, border-color .15s;
+}
+#tweaksPanel .tw-swatches button:hover{ transform:scale(1.1); }
+#tweaksPanel .tw-swatches button.active{
+  border-color:#efece6;
+  box-shadow:0 0 0 2px rgba(201,169,106,.4);
+}
+#tweaksPanel select{
+  background:rgba(255,255,255,.06);
+  color:#efece6;
+  border:1px solid rgba(239,236,230,.2);
+  padding:8px 10px;
+  font-family:inherit;
+  font-size:13px;
+  outline:none;
+}
+#tweaksPanel input[type=range]{
+  width:100%;
+  accent-color:#c9a96a;
+}
+#tweaksPanel .tw-scale{
+  display:flex; justify-content:space-between;
+  font-size:10px; letter-spacing:.2em;
+  opacity:.5; margin-top:-2px;
+}
+#tweaksPanel .tw-toggle{
+  position:relative; width:44px; height:24px;
+  display:inline-block; cursor:pointer;
+}
+#tweaksPanel .tw-toggle input{
+  position:absolute; opacity:0; width:0; height:0;
+}
+#tweaksPanel .tw-toggle span{
+  position:absolute; inset:0;
+  background:rgba(255,255,255,.15);
+  border-radius:999px; transition:.2s;
+}
+#tweaksPanel .tw-toggle span::before{
+  content:""; position:absolute;
+  width:18px; height:18px; border-radius:999px;
+  background:#efece6; top:3px; left:3px;
+  transition:.2s;
+}
+#tweaksPanel .tw-toggle input:checked + span{ background:#c9a96a; }
+#tweaksPanel .tw-toggle input:checked + span::before{ transform:translateX(20px); }
+</style>
+
+<script>
+/* ─── Tweakable Defaults ─── */
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "accent": "#c89090",
+  "bg": "#0b0d10",
+  "font": "serif",
+  "grain": 17,
+  "titleWeight": 900,
+  "saturation": 73,
+  "bw": false
+}/*EDITMODE-END*/;
+
+const ACCENT_CHOICES = [
+  { key:"gold",   val:"#c9a96a" },
+  { key:"brass",  val:"#b8935a" },
+  { key:"blue",   val:"#4a7a9e" },
+  { key:"rose",   val:"#c89090" },
+  { key:"paper",  val:"#efece6" },
+];
+const BG_CHOICES = [
+  { key:"ink",     val:"#0b0d10" },
+  { key:"midnight",val:"#0d1420" },
+  { key:"coal",    val:"#15171a" },
+  { key:"bronze",  val:"#1a1410" },
+];
+
+let state = { ...TWEAK_DEFAULTS };
+
+function applyState(){
+  document.documentElement.style.setProperty('--gold', state.accent);
+  document.documentElement.style.setProperty('--ink', state.bg);
+  document.querySelectorAll('deck-stage section').forEach(s=>{
+    s.style.background = state.bg;
+  });
+  document.querySelectorAll('.grain').forEach(g=>{
+    g.style.opacity = state.grain / 100;
+  });
+  document.querySelectorAll('.title, .big-quote, .quote-big, .cn-big').forEach(t=>{
+    t.style.fontWeight = state.titleWeight;
+  });
+  document.querySelectorAll('.ph').forEach(p=>{
+    // saturation: 0 = fully B&W, 100 = full color
+    const s = Math.max(0, Math.min(100, state.saturation ?? 0));
+    const gray = 1 - (s / 100);
+    // contrast lifts slightly as we move toward B&W, to keep cinematic punch
+    const contrast = 1 + (gray * 0.06);
+    p.style.filter = gray === 0 ? 'none' : `grayscale(${gray}) contrast(${contrast.toFixed(3)})`;
+  });
+  const fontMap = {
+    serif: '"Noto Serif TC", serif',
+    sans:  '"Noto Sans TC", sans-serif',
+  };
+  document.querySelectorAll('.body-copy, .intro, .warm, .follow').forEach(el=>{
+    el.style.fontFamily = fontMap[state.font];
+  });
+}
+
+function buildSwatches(container, choices, currentVal, onPick){
+  container.innerHTML = '';
+  choices.forEach(c=>{
+    const b = document.createElement('button');
+    b.style.background = c.val;
+    b.title = c.key;
+    if (c.val === currentVal) b.classList.add('active');
+    b.addEventListener('click', ()=>{
+      onPick(c.val);
+      [...container.children].forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+    });
+    container.appendChild(b);
+  });
+}
+
+function initTweaks(){
+  const panel = document.getElementById('tweaksPanel');
+  buildSwatches(document.getElementById('tw-accent'), ACCENT_CHOICES, state.accent, v=>{
+    state.accent = v; applyState(); persist({accent:v});
+  });
+  buildSwatches(document.getElementById('tw-bg'), BG_CHOICES, state.bg, v=>{
+    state.bg = v; applyState(); persist({bg:v});
+  });
+  const fontSel = document.getElementById('tw-font');
+  fontSel.value = state.font;
+  fontSel.addEventListener('change', e=>{
+    state.font = e.target.value; applyState(); persist({font:state.font});
+  });
+  const grain = document.getElementById('tw-grain');
+  const grainV = document.getElementById('tw-grain-v');
+  grain.value = state.grain;
+  grainV.textContent = state.grain;
+  grain.addEventListener('input', e=>{
+    state.grain = +e.target.value;
+    grainV.textContent = state.grain;
+    applyState(); persist({grain:state.grain});
+  });
+  const wt = document.getElementById('tw-weight');
+  const wtV = document.getElementById('tw-weight-v');
+  wt.value = state.titleWeight;
+  wtV.textContent = state.titleWeight;
+  wt.addEventListener('input', e=>{
+    state.titleWeight = +e.target.value;
+    wtV.textContent = state.titleWeight;
+    applyState(); persist({titleWeight:state.titleWeight});
+  });
+  const sat = document.getElementById('tw-sat');
+  const satV = document.getElementById('tw-sat-v');
+  if (typeof state.saturation !== 'number') state.saturation = 0;
+  sat.value = state.saturation;
+  satV.textContent = state.saturation;
+  sat.addEventListener('input', e=>{
+    state.saturation = +e.target.value;
+    satV.textContent = state.saturation;
+    applyState(); persist({saturation:state.saturation});
+  });
+}
+
+function persist(edits){
+  try{
+    window.parent.postMessage({type:'__edit_mode_set_keys', edits}, '*');
+  }catch(e){}
+}
+
+/* Edit-mode listener MUST be registered before we announce availability */
+window.addEventListener('message', (e)=>{
+  const d = e.data || {};
+  if (d.type === '__activate_edit_mode'){
+    document.getElementById('tweaksPanel').style.display = 'block';
+  } else if (d.type === '__deactivate_edit_mode'){
+    document.getElementById('tweaksPanel').style.display = 'none';
+  }
+});
+
+initTweaks();
+applyState();
+
+try{
+  window.parent.postMessage({type:'__edit_mode_available'}, '*');
+}catch(e){}
+</script>
+
+<script src="deck-stage.js"></script>
+
+<style>
+@media print {
+  @page { size: 1920px 1080px; margin: 0; }
+  html, body { background:#0b0d10 !important; margin:0 !important; padding:0 !important; -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+  #tweaksPanel { display:none !important; }
+  deck-stage { display:block !important; width:1920px !important; height:auto !important; transform:none !important; }
+  deck-stage section {
+    width:1920px !important;
+    height:1080px !important;
+    transform:none !important;
+    page-break-after: always;
+    break-after: page;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    display:block !important;
+    position:relative !important;
+  }
+  deck-stage section:last-child { page-break-after: auto; break-after: auto; }
+  .grain { opacity:.12 !important; }
+}
+</style>
+
+<script>
+/* Print-ready: wait for fonts + deck-stage, then print */
+(async () => {
+  try { if (document.fonts && document.fonts.ready) await document.fonts.ready; } catch(e){}
+  // Wait for deck-stage to upgrade and lay out slides
+  await new Promise(r => setTimeout(r, 1200));
+  // Force deck-stage into noscale mode so print gets full 1920x1080
+  const stage = document.querySelector('deck-stage');
+  if (stage) {
+    stage.setAttribute('noscale', '');
+    stage.style.transform = 'none';
+    stage.style.width = '1920px';
+    stage.style.height = 'auto';
+  }
+  await new Promise(r => setTimeout(r, 400));
+  window.print();
+})();
+</script>
+</body>
+</html>
