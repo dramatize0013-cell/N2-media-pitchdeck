@@ -40,6 +40,7 @@ Drag this folder into either dashboard. Both auto-detect static sites — no con
 ├── deck-stage.js       # Custom <deck-stage> web component (slide nav + scaling)
 ├── assets/
 │   ├── *.png           # Cinematic photography (numbered 01–17)
+│   ├── optimized/      # WebP versions used by the live deck for faster loading
 │   ├── logos/          # Client/partner logos (slide 11b)
 │   └── photos/         # Additional photography library (not currently wired in)
 └── README.md
@@ -66,7 +67,7 @@ The deck is a single HTML file with all styles inline. To change content:
 4. Save → refresh browser.
 
 ### Swapping photos
-Photos are set via inline `background-image: url('assets/...')` declarations. Change the filename to swap.
+Photos are set via inline `background-image: url('assets/optimized/...')` declarations. Change the filename to swap. Keep the original PNGs in `assets/` as source-quality backups, then export a matching WebP into `assets/optimized/` for the live deck.
 
 ### Swapping client logos (slide 11b)
 Logos live in `assets/logos/`. The slide 11b `.logo-grid` block has 14 `<div class="logo-cell"><img ...></div>` entries — replace the `src` attribute with the logo filename you want.
